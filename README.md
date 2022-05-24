@@ -15,3 +15,16 @@ I don't totally buy the argument in the case where the additional parameters are
 However, my results from other implementations of reversible jump MCMC suggest that the argument holds even in these cases.
 Those implementations are upon problems that are too complicated to make for easy debugging, however.
 This repository, therefore, is a simpler implementation to a simpler problem, in order to investigate the phenomenon, and either disprove or convince myself of the argument above.
+
+## Problem
+
+The model I'll be implementing is inspired by the first example in the paper that introduced reversible jump MCMC, Green 1995 (https://doi.org/10.1093/biomet/82.4.711).
+The data in that model are the dates of British mining disasters, and the model is a Poisson process with the rate defined by a step function.
+The number of steps, and hence the number of parameters in the model, is variable, making this a problem for reversible jump MCMC.
+Each additional step added adds two new parameters: the location of the step, and the height of the function after the step.
+
+The location of the step is useful for these purposes, as that is a continuous variable over an arbitrary range with strictly defined boundaries.
+As such, rescaling this range provides a very useful method of testing the effect of the range of additional parameters.
+However, in the original model, the other additional parameter is a rate of a Poisson process.
+As such, rescaling the time will inversely rescale the rate, cancelling any effect of rescaling.
+Therefore, for this test, the model must be changed such that the value being defined with a step function is not a rate.
