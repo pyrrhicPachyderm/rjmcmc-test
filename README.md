@@ -18,13 +18,10 @@ This repository, therefore, is a simpler implementation to a simpler problem, in
 
 ## Problem
 
-The model I'll be implementing is inspired by the first example in the paper that introduced reversible jump MCMC, Green 1995 (https://doi.org/10.1093/biomet/82.4.711).
-The data in that model are the dates of British mining disasters, and the model is a Poisson process with the rate defined by a step function.
-The number of steps, and hence the number of parameters in the model, is variable, making this a problem for reversible jump MCMC.
-Each additional step added adds two new parameters: the location of the step, and the height of the function after the step.
+The problem shall be the Bayesian equivalent of a simple two sample t-test, assuming equal variance of the two samples, implemented using reversible jump MCMC.
+The data shall be normally distributed, with known standard deviation, about two known means with a given difference.
+By keeping the difference between the means as a constant multiple of the standard deviation, the posterior model selection distribution should be invariant as the data are rescaled.
 
-The location of the step is useful for these purposes, as that is a continuous variable over an arbitrary range with strictly defined boundaries.
-As such, rescaling this range provides a very useful method of testing the effect of the range of additional parameters.
-However, in the original model, the other additional parameter is a rate of a Poisson process.
-As such, rescaling the time will inversely rescale the rate, cancelling any effect of rescaling.
-Therefore, for this test, the model must be changed such that the value being defined with a step function is not a rate.
+There will be two models for the reversible jump MCMC to select between: a model with a single mean and variance, and a model with two distinct means (but still one shared variance).
+The difference between these models is one parameter representing the mean.
+Rescaling the data will change the range of this parameter, and hence test the phenomenon of interest.
