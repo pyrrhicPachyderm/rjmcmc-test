@@ -18,10 +18,10 @@ This repository, therefore, is a simpler implementation to a simpler problem, in
 
 ## Problem
 
-The problem shall be the Bayesian equivalent of a simple two sample t-test, assuming equal variance of the two samples, implemented using reversible jump MCMC.
-The data shall be normally distributed, with known standard deviation, about two known means with a given difference.
-By keeping the difference between the means as a constant multiple of the standard deviation, the posterior model selection distribution should be invariant as the data are rescaled.
+The problem shall be that of ordinary least squares regression, implemented using reversible jump MCMC.
+The data shall be multivariate normally distributed about mean (0,0), and as such we may assume an intercept of zero.
+By rescaling the x values, we expect the slope of the model (but not any other parameters) to change.
 
-There will be two models for the reversible jump MCMC to select between: a model with a single mean and variance, and a model with two distinct means (but still one shared variance).
-The difference between these models is one parameter representing the mean.
-Rescaling the data will change the range of this parameter, and hence test the phenomenon of interest.
+There will be two models for the reversible jump MCMC to select between: a model with just a residual variance, and a model a slope and a residual variance.
+Both shall assume an intercept of zero.
+The difference between these models is only the slope parameter, and rescaling the x values will alter the range of this parameter, hence testing the phenomenon of interest.
